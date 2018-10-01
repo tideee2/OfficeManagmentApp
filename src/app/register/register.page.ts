@@ -17,6 +17,7 @@ export class RegisterPage implements OnInit {
     public PASSPATTERN = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$';
     public validation_messages;
     public isPasswordMatched = false;
+
     constructor(public formBuilder: FormBuilder,
                 public auth: AuthService,
                 public http: HttpClient,
@@ -52,7 +53,7 @@ export class RegisterPage implements OnInit {
                 {
                     validator: this.comparePasswords
                 }),
-            });
+        });
         this.validation_messages = {
             'username': {
                 required: 'Username is required.',
@@ -83,22 +84,16 @@ export class RegisterPage implements OnInit {
         };
     }
 
-    ngOnInit() {}
-    comparePasswords(group: FormGroup): {[key: string]: any} {
+    ngOnInit() {
+    }
+
+    comparePasswords(group: FormGroup): { [key: string]: any } {
         const password = group.controls['password'];
         const confirmPassword = group.controls['confirm_password'];
         if (password.value !== confirmPassword.value) {
-            return { 'comparePasswords': true };
+            return {'comparePasswords': true};
         }
         return null;
-    }
-    checkData(e) {
-        console.log(this.regform);
-    }
-
-    checkPass() {
-        this.isPasswordMatched = this.regform.get('password').value === this.regform.get('confirm_password').value;
-        console.log(this.isPasswordMatched);
     }
 
     private submit(event) {
@@ -109,10 +104,21 @@ export class RegisterPage implements OnInit {
         }
     }
 
-    get username() { return this.regform.get('username'); }
-    get email() { return this.regform.get('email'); }
-    get password() { return this.regform.get('matchingPasswords.password'); }
-    get confirm_password() { return this.regform.get('matchingPasswords.confirm_password'); }
+    get username() {
+        return this.regform.get('username');
+    }
+
+    get email() {
+        return this.regform.get('email');
+    }
+
+    get password() {
+        return this.regform.get('matchingPasswords.password');
+    }
+
+    get confirm_password() {
+        return this.regform.get('matchingPasswords.confirm_password');
+    }
 
     getErrorMessage(name: string): any {
         const res = [];
@@ -121,8 +127,9 @@ export class RegisterPage implements OnInit {
         });
         return res[0];
     }
+
     submitRegister(): void {
-        this.auth.registerUser(this.username.value, this.email.value, this.password.value).subscribe( value => {
+        this.auth.registerUser(this.username.value, this.email.value, this.password.value).subscribe(value => {
                 console.log(value);
                 this.presentAlert('Message', 'Register is successful. Check your email');
             },
@@ -136,10 +143,12 @@ export class RegisterPage implements OnInit {
                 }
             });
     }
+
     qq() {
         console.log(this.regform.get('username'));
         console.log(this.username);
     }
+
     async presentAlert(headerText: string, messageText: string) {
         const alert = await this.alertController.create({
             header: headerText,

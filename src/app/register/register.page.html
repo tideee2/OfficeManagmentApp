@@ -15,46 +15,51 @@
             </ion-label>
         </ion-list-header>
         <form [formGroup]="regform">
-            <ion-item-group>
+            <div class="input-container">
                 <ion-item>
-                    <ion-label position="floating">Enter username</ion-label>
-                    <ion-input class="form-control" id="username" formControlName="username"></ion-input>
-                    <div *ngIf="username.invalid && (username.dirty || username.touched)" color="danger" class="alert alert-danger">
-                        <span>{{ getErrorMessage('username') }}</span>
-                    </div>
+                    <!--<ion-label position="fixed">Enter username</ion-label>-->
+                    <ion-input class="form-control" id="username" formControlName="username" placeholder="Enter username"></ion-input>
                 </ion-item>
-                <ion-item>
-                    <ion-label position="floating">Enter email</ion-label>
-                    <ion-input name="email" formControlName="email"></ion-input>
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" color="danger" class="alert alert-danger">
-                        <span>{{ getErrorMessage('email') }}</span>
-                    </div>
-                </ion-item>
-                <div formGroupName="matchingPasswords">
-                    <ion-item>
-                        <ion-label position="floating">Enter password</ion-label>
-                        <ion-input name="password" type="password" formControlName="password"></ion-input>
-                        <ion-col *ngIf="password.invalid && (password.dirty || password.touched)" color="danger" class="alert alert-danger">
-                            <span>{{ getErrorMessage('password') }}</span>
-                        </ion-col>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label position="floating">Confirm password</ion-label>
-                        <ion-input name="confirm_password" type="password" formControlName="confirm_password"></ion-input>
-                        <ion-col *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" color="danger" class="alert alert-danger">
-                            <span>{{ getErrorMessage('confirm_password') }}</span>
-                        </ion-col>
-                    </ion-item>
+                <div *ngIf="username.invalid && (username.dirty || username.touched)" color="danger" class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('username') }}</span>
                 </div>
+            </div>
+            <div class="input-container">
+                <ion-item>
+                    <!--<ion-label position="fixed">Enter email</ion-label>-->
+                    <ion-input name="email" formControlName="email" placeholder="Enter email"></ion-input>
+                </ion-item>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" color="danger" class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('email') }}</span>
+                </div>
+            </div>
+            <div formGroupName="matchingPasswords">
+                <div class="input-container">
+                    <ion-item>
+                        <!--<ion-label position="fixed">Enter password</ion-label>-->
+                        <ion-input name="password" type="password" formControlName="password" placeholder="Enter password"></ion-input>
+                    </ion-item>
+                    <ion-col *ngIf="password.invalid && (password.dirty || password.touched)" color="danger" class="alert alert-danger">
+                        <span class="error-msg">{{ getErrorMessage('password') }}</span>
+                    </ion-col>
+                </div>
+                <div class="input-container">
+                    <ion-item>
+                        <!--<ion-label position="fixed">Confirm password</ion-label>-->
+                        <ion-input name="confirm_password" type="password" formControlName="confirm_password" placeholder="Confirm password"></ion-input>
+                    </ion-item>
+                    <ion-col *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" color="danger" class="alert alert-danger">
+                        <span class="error-msg">{{ getErrorMessage('confirm_password') }}</span>
+                    </ion-col>
+                </div>
+            </div>
+            <div class="input-container">
                 <ion-row *ngIf="password.valid && confirm_password.valid && regform.get('matchingPasswords').invalid">
                     <ion-col class="error-msg">
                         <sup ion-text>Passwords do not match</sup>
                     </ion-col>
                 </ion-row>
-            </ion-item-group>
-            <ion-row>
-    <!--<button (click)="submitRegister()">fff</button>-->
-            </ion-row>
+            </div>
             <ion-item class="submit-btn-container">
                 <ion-grid>
                     <ion-row justify-content-center>

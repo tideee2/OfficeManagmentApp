@@ -1,19 +1,24 @@
-.submit-btn-container{
-  margin-top:10vh;
+ion-item{
+  ion-label{
+    font-size:14px;
+  }
+
+  .submit-btn{
+
+  }
+  ion-item .item-native,
+  ion-item .item-inner{
+    border: none;
+  }
+
 }
-ion-item-group{
-  height:40vh;
-}
-.validation-errors{
-  height:10vh;
-  padding-top:1vh;
-}
-ion-item-group ion-item:last-child{
-  border-bottom: 1px solid #dfdfdf;
-}
-.error-text{
-  display: block;
+.error-msg{
+  margin-top: 5px;
+  color: #b3171f;
+  font-size: 12px;
   text-align: center;
-  color: red;
-  font-size: 0.6rem;
+  display: block;
+}
+.input-container{
+  height: 10vh;
 }

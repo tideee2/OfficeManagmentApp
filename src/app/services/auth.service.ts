@@ -1,19 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpClientModule, HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private url = 'http://5.101.180.10:3002/';
-    private url2 = 'http://5.101.180.10:3002/transactions';
-    public aa = 1;
+    private MAIN_URL = 'http://5.101.180.10:3005/';
+    private REGISTER_URL = 'http://5.101.180.10:3005/transactions';
+    private LOGIN_URL = 'http://5.101.180.10:3005/auth/login';
+
     private httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    constructor( private http: HttpClient) {
+
+    constructor(private http: HttpClient) {
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -31,17 +33,33 @@ export class AuthService {
         return throwError(
             'Something bad happened; please try again later.');
     }
+
     public registerUser(name: string, email: string, password: string): Observable<any> {
-        return this.http.post(this.url + 'auth/registration', {
+        return this.http.post(this.MAIN_URL + 'auth/registration', {
             'name': name,
             'email': email,
             'password': password
         }, this.httpOptions);
     }
+
     public loginUser(email: string, password: string) {
-        return this.http.post(this.url + 'auth/login', {
+        return this.http.post(this.MAIN_URL + 'auth/login', {
             'email': email,
             'password': password
         }, this.httpOptions);
+    }
+
+    public changePassword(oldPassword: string, newPassword: string, token: string): Observable<any> {
+        return this.http.put(this.MAIN_URL + 'user/password', {
+            'confirm': oldPassword,
+            'password': newPassword
+        }, { headers: new HttpHeaders({ 'x-access-token': token }) });
+    }
+
+    public changeUsername(newUsername: string, oldPassword: string, token: string): Observable<any> {
+        return this.http.put(this.MAIN_URL + 'user/password', {
+            'confirm': oldPassword,
+            'username': newUsername
+        }, { headers: new HttpHeaders({ 'x-access-token': token }) });
     }
 }

@@ -1,55 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-list-header>
-      <ion-label>
-        Login
-      </ion-label>
-    </ion-list-header>
-    <form [formGroup]="formgroup">
-      <ion-item-group>
-        <ion-item>
-          <ion-label position="floating">Enter email</ion-label>
-          <ion-input name="email" formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Enter password</ion-label>
-          <ion-input name="password" type="password" formControlName="password"></ion-input>
-        </ion-item>
-      </ion-item-group>
-      <div class="validation-errors">
-        <ion-row
-                *ngFor="let validation of validation_messages.email">
-          <ion-col
-                  class="error-message error-msg"
-                  *ngIf="!formgroup.get('email').length && formgroup.get('email').getError(validation.type)
-                        && (formgroup.get('email').dirty && formgroup.get('email').touched)">
-            <span class="error-text">{{ validation.message }}</span>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngFor="let validation of validation_messages.password">
-          <ion-col
-                  class="error-message error-msg"
-                  *ngIf="!formgroup.get('password').length && formgroup.get('password').getError(validation.type)
-                        && (formgroup.get('password').dirty && formgroup.get('password').touched)">
-            <span class="error-text">{{ validation.message }}</span>
-          </ion-col>
-        </ion-row>
-      </div>
-      <ion-item class="submit-btn-container">
-        <ion-grid>
-          <ion-row justify-content-center>
-            <ion-col size="12">
-              <ion-button slot="" size="normal" class="submit-btn ion-col-3" color="primary" (click)="checkData($event)" >Submit</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
-    </form>
-  </ion-list>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>
+                Register
+            </ion-label>
+        </ion-list-header>
+        <form [formGroup]="loginForm">
+            <div class="input-container">
+                <ion-item>
+                    <ion-input name="email" formControlName="email" placeholder="Enter email"></ion-input>
+                </ion-item>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" color="danger" class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('email') }}</span>
+                </div>
+            </div>
+            <div class="input-container">
+                <ion-item>
+                    <ion-input name="password" type="password" formControlName="password"
+                               placeholder="Enter password"></ion-input>
+                </ion-item>
+                <ion-col *ngIf="password.invalid && (password.dirty || password.touched)" color="danger"
+                         class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('password') }}</span>
+                </ion-col>
+            </div>
+            <ion-item class="submit-btn-container">
+                <ion-grid>
+                    <ion-row justify-content-center>
+                        <ion-col size="12">
+                            <ion-button slot="" size="normal" class="submit-btn ion-col-3" color="primary"
+                                        (click)="submitLogin()">Submit
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </form>
+    </ion-list>
 </ion-content>
