@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class AuthService {
     private url = 'http://5.101.180.10:3002/';
     private url2 = 'http://5.101.180.10:3002/transactions';
-    public aa = 2;
+    public aa = 1;
     private httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };

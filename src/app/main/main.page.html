@@ -1,0 +1,81 @@
+<ion-header swipeAll >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title class="title-top" hidden>main</ion-title>
+    <ion-label color="success" class="top-price">2000 UAH</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding [scrollY]="qq()">
+  <ion-card class="price-card"  (swiperight)="swipeAll($event)">
+    <ion-card-content>
+      <ion-label color="success">2000 UAH</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <!--<ion-card class="inf-list">-->
+    <!--<ion-list>-->
+      <!--<ion-item *ngFor="let i of items">{{i}}</ion-item>-->
+    <!--</ion-list>-->
+
+    <!--<ion-infinite-scroll threshold="20px" (ionInfinite)="loadData($event)">-->
+      <!--<ion-infinite-scroll-content-->
+              <!--loadingSpinner="bubbles"-->
+              <!--loadingText="Loading more data...">-->
+      <!--</ion-infinite-scroll-content>-->
+    <!--</ion-infinite-scroll>-->
+  <!--</ion-card>-->
+  <ion-list class="list">
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+    <p>qqq</p>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <!--<ion-fab-button [href]="'/addPurchase'" routerDirection="forward">-->
+    <ion-fab-button routerDirection="forward" (click)="addPurchase()">
+    <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

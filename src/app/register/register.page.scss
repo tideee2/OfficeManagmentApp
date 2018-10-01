@@ -1,0 +1,19 @@
+.submit-btn-container{
+  margin-top:10vh;
+}
+ion-item-group{
+  height:40vh;
+}
+.validation-errors{
+  height:10vh;
+  padding-top:1vh;
+}
+ion-item-group ion-item:last-child{
+  border-bottom: 1px solid #dfdfdf;
+}
+.error-text{
+  display: block;
+  text-align: center;
+  color: red;
+  font-size: 0.6rem;
+}
