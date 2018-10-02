@@ -7,14 +7,14 @@ import {Observable, throwError} from 'rxjs';
 })
 export class TransactionsService {
     public MAIN_URL = 'http://5.101.180.10:3005/';
-    private  GET_TRANSACTION_URL;
     private httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-
+    public token: string;
     constructor(public http: HttpClient,
 
                 ) {
+        this.token = localStorage.getItem('x-access-token');
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -34,11 +34,12 @@ export class TransactionsService {
     }
 
     getTransactions(type: string, start: string, finish: string, page: number, token: string): Observable<any> {
-        const GET_TRANSACTION_URL = `${this.MAIN_URL}transactions/?type=${type}&start=${start}&finish=${finish}&page=${page}`;
-        console.log(GET_TRANSACTION_URL);
-        return this.http.get(GET_TRANSACTION_URL, { headers: new HttpHeaders({ 'x-access-token': token }) });
+        // const GET_TRANSACTION_URL = `${this.MAIN_URL}transactions/?type=${type}&start=${start}&finish=${finish}&page=${page}`;
+
+        return this.http.get(this.MAIN_URL + 'transactions', { headers: new HttpHeaders({ 'x-access-token': this.token }) });
     }
-    // addTransactions(description: string, type: string, cost: number): Observable<any> {
-    //     const GET_TRANSACTION_URL = `${this.MAIN_URL}transactions/?type=${type}&start=${start}&finish=${finish}&page=${page}`;
-    // }
+    addTransactions(description: string, type: string, cost: number): Observable<any> {
+        return this.http.post(this.MAIN_URL + 'transactions', {'description': description, 'type': type, 'cost': cost},
+            { headers: new HttpHeaders({ 'x-access-token': this.token }) });
+    }
 }

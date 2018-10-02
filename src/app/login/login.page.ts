@@ -55,10 +55,14 @@ export class LoginPage implements OnInit {
         return res[0];
     }
     submitLogin(): void {
-        this.auth.loginUser(this.email.value, this.password.value).subscribe( value => {
+        this.auth.loginUser(this.email.value, this.password.value).subscribe( (value: any) => {
                 console.log(value);
                 this.presentAlert('Message', 'Login is successful. Welcome.');
-                // localStorage.setItem('x-access-token', value.token);
+                localStorage.setItem('x-access-token', value.token);
+                localStorage.setItem('balance', value.user.balance);
+                localStorage.setItem('id', value.user._id);
+                localStorage.setItem('name', value.user.name);
+                localStorage.setItem('email', value.user.email);
                 this.router.navigate(['main']);
             },
             error => {

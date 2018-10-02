@@ -53,13 +53,20 @@ export class AuthService {
         return this.http.put(this.MAIN_URL + 'user/password', {
             'confirm': oldPassword,
             'password': newPassword
-        }, { headers: new HttpHeaders({ 'x-access-token': token }) });
+        }, {headers: new HttpHeaders({'x-access-token': token})});
     }
 
     public changeUsername(newUsername: string, oldPassword: string, token: string): Observable<any> {
         return this.http.put(this.MAIN_URL + 'user/password', {
             'confirm': oldPassword,
             'username': newUsername
-        }, { headers: new HttpHeaders({ 'x-access-token': token }) });
+        }, {headers: new HttpHeaders({'x-access-token': token})});
+    }
+
+    public forgotPassword(email: string): Observable<any> {
+        return this.http.put(this.MAIN_URL + 'auth/change',
+            {'email': email},
+            {headers: new HttpHeaders({'Content-Type': 'application/json'})}
+            );
     }
 }

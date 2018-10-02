@@ -39,18 +39,18 @@
                         <!--<ion-label position="fixed">Enter password</ion-label>-->
                         <ion-input name="password" type="password" formControlName="password" placeholder="Enter password"></ion-input>
                     </ion-item>
-                    <ion-col *ngIf="password.invalid && (password.dirty || password.touched)" color="danger" class="alert alert-danger">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" color="danger" class="alert alert-danger">
                         <span class="error-msg">{{ getErrorMessage('password') }}</span>
-                    </ion-col>
+                    </div>
                 </div>
                 <div class="input-container">
                     <ion-item>
                         <!--<ion-label position="fixed">Confirm password</ion-label>-->
                         <ion-input name="confirm_password" type="password" formControlName="confirm_password" placeholder="Confirm password"></ion-input>
                     </ion-item>
-                    <ion-col *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" color="danger" class="alert alert-danger">
+                    <div *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" color="danger" class="alert alert-danger">
                         <span class="error-msg">{{ getErrorMessage('confirm_password') }}</span>
-                    </ion-col>
+                    </div>
                 </div>
             </div>
             <div class="input-container">

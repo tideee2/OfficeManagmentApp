@@ -1,61 +1,67 @@
-.inf-list{
-  position: absolute;
-  top:50vh;
-  width:85%;
+//.inf-list{
+//  position: absolute;
+//  top:50vh;
+//  width:85%;
+//}
+//.list{
+//  position:absolute;
+//  top:30%;
+//}
+//.price-card{
+//  height:25%;
+//  position: absolute;
+//
+//  z-index: 1000;
+//  ion-card-content{
+//    display: flex;
+//    justify-content: center;
+//    text-align: center;
+//    font-size: 3em;
+//    ion-label{
+//      width:100%;
+//    }
+//  }
+//}
+//.top-price{
+//  transform: translate3d(0,50px,0);
+//  opacity: 0;
+//  text-align: center;
+//}
+//@keyframes bounceOutUp {
+//  0% {
+//    transform: translate3d(0, 0, 0);
+//  }
+//  to {
+//    opacity: 0;
+//    transform: translate3d(0, -100px, 0);
+//  }
+//}
+//@keyframes bounceOutIn {
+//  0% {
+//    opacity: 0;
+//    transform: translate3d(0, 50px, 0);
+//  }
+//  to {
+//    opacity: 1;
+//    transform: translate3d(0, 0, 0);
+//  }
+//}
+//.nodisplay{
+//  opacity: 0;
+//}
+//.anim11 {
+//  animation-name: bounceOutUp;
+//  animation-fill-mode: forwards;
+//  animation-duration: 1s;
+//}
+//.anim211 {
+//  animation-name: bounceOutIn;
+//  animation-fill-mode: forwards;
+//  animation-duration: 1s;
+//}
+.decrease-color{
+  color: red;
 }
-.list{
-  position:absolute;
-  top:30%;
-}
-.price-card{
-  height:25%;
-  position: absolute;
-
-  z-index: 1000;
-  ion-card-content{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 3em;
-    ion-label{
-      width:100%;
-    }
-  }
-}
-.top-price{
-  transform: translate3d(0,50px,0);
-  opacity: 0;
-  text-align: center;
-}
-@keyframes bounceOutUp {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    opacity: 0;
-    transform: translate3d(0, -100px, 0);
-  }
-}
-@keyframes bounceOutIn {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 50px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-.nodisplay{
-  opacity: 0;
-}
-.anim11 {
-  animation-name: bounceOutUp;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
-}
-.anim211 {
-  animation-name: bounceOutIn;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
+.increase-color{
+  color: green;
 }

@@ -19,9 +19,11 @@ export class MainPage implements OnInit {
                 public transService: TransactionsService,
                 public renderer: Renderer) {
         this.token = localStorage.getItem('x-access-token');
+
     }
 
     ngOnInit() {
+
         window.onscroll = function (e) {
             console.log('fff');
         };
