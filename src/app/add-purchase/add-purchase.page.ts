@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {TransactionsService} from '../services/transactions.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -12,13 +12,14 @@ export class AddPurchasePage implements OnInit {
     public transactionType = '';
     public transactionForm: FormGroup;
     public validation_messages;
-
+    @Input() data: any;
     constructor(public modalController: ModalController,
                 public transService: TransactionsService,
                 public formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
+        console.log(this.data);
         this.transactionForm = this.formBuilder.group({
             cost: ['', Validators.compose([
                 Validators.required,
@@ -45,7 +46,9 @@ export class AddPurchasePage implements OnInit {
     }
     get cost() { return this.transactionForm.get('cost'); }
     get description() { return this.transactionForm.get('description'); }
-
+    set cost(val) {
+        this.transactionForm.value.cost = val;
+    }
     getErrorMessage(name: string): any {
         const res = [];
         Object.keys(this[name].errors).forEach((error) => {
@@ -57,10 +60,11 @@ export class AddPurchasePage implements OnInit {
         this.transService.addTransactions(this.description.value, this.transactionType, this.cost.value)
             .subscribe(value => {
                 console.log(value);
+                this.data.unshift(value);
             },
             error => {
                 console.log(error);
                 });
-        // this.modalController.dismiss();
+        this.modalController.dismiss();
     }
 }

@@ -12,6 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AddPurchasePageModule} from './add-purchase/add-purchase.module';
 import {MyscrollDirective} from './myscroll.directive';
 import {AuthService} from './services/auth.service';
+import {AboutGuard} from './guards/access-guard';
 
 @NgModule({
     declarations: [AppComponent, MyscrollDirective],
@@ -20,6 +21,7 @@ import {AuthService} from './services/auth.service';
     providers: [
         StatusBar,
         SplashScreen,
+        AboutGuard,
         // AuthService,
         // HttpClient,
         HttpClientModule,

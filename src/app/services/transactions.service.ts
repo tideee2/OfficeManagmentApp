@@ -33,12 +33,15 @@ export class TransactionsService {
             'Something bad happened; please try again later.');
     }
 
-    getTransactions(type: string, start: string, finish: string, page: number, token: string): Observable<any> {
+    getTransactions(type: string): Observable<any> {
         // const GET_TRANSACTION_URL = `${this.MAIN_URL}transactions/?type=${type}&start=${start}&finish=${finish}&page=${page}`;
 
-        return this.http.get(this.MAIN_URL + 'transactions', { headers: new HttpHeaders({ 'x-access-token': this.token }) });
+        return this.http.get(this.MAIN_URL + `transactions/?type=${type}`, { headers: new HttpHeaders({ 'x-access-token': this.token }) });
     }
     addTransactions(description: string, type: string, cost: number): Observable<any> {
+        console.log(description, type, cost);
+        console.log(this.MAIN_URL + 'transactions');
+        console.log(this.token);
         return this.http.post(this.MAIN_URL + 'transactions', {'description': description, 'type': type, 'cost': cost},
             { headers: new HttpHeaders({ 'x-access-token': this.token }) });
     }

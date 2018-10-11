@@ -27,15 +27,35 @@ export class MainPage implements OnInit {
         window.onscroll = function (e) {
             console.log('fff');
         };
-        this.transService.getTransactions('decrease', '2018-01-14', '2018-12-1', 1, this.token)
+        this.transService.getTransactions('')
             .subscribe((data) => {
                     console.log(data);
                     this.items = data;
+                    this.items.sort((a, b) => {
+                            return -(new Date(a.date)).getTime() + (new Date(b.date)).getTime();
+                        });
+                    console.log(this.items);
                 },
                 error => {
                     console.log(error);
                 });
     }
+
+    ionViewDidLoad() {
+
+    }
+
+    // getItems() {
+    //     this.transService.getTransactions('decrease', '2018-01-14', '2018-12-1', 1, this.token)
+    //         .subscribe((data) => {
+    //                 console.log(data);
+    //                 this.items = data;
+    //             },
+    //             error => {
+    //                 console.log(error);
+    //             });
+    //     return this.items;
+    // }
 
     loadData(event) {
         setTimeout(() => {
@@ -50,7 +70,7 @@ export class MainPage implements OnInit {
     async addPurchase() {
         const modal = await this.modalController.create({
             component: AddPurchasePage,
-            componentProps: {value: 123}
+            componentProps: {data: this.items}
         });
         return await modal.present();
     }

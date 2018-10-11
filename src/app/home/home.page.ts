@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 export class HomePage {
   public listOfButtons = ['login', 'main', 'forgot', 'change', 'register', 'user', 'addPurchase'];
 
+    constructor() {
+        // console.log(localStorage.getItem('x-access-token'));
+    }
+
 }
