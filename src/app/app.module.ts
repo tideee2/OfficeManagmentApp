@@ -13,11 +13,20 @@ import {AddPurchasePageModule} from './add-purchase/add-purchase.module';
 import {MyscrollDirective} from './myscroll.directive';
 import {AuthService} from './services/auth.service';
 import {AboutGuard} from './guards/access-guard';
+import { IonicStorageModule } from '@ionic/storage';
+import { HideHeaderDirective } from './directives/hide-header.directive';
 
 @NgModule({
     declarations: [AppComponent, MyscrollDirective],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AddPurchasePageModule, HttpClientModule],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        AddPurchasePageModule,
+        HttpClientModule,
+        IonicStorageModule.forRoot()
+    ],
     providers: [
         StatusBar,
         SplashScreen,

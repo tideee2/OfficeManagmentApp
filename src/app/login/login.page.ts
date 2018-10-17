@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {StorageService} from '../services/storage.service';
+import {TransactionsService} from '../services/transactions.service';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    public loginForm: FormGroup;
     public EMAILPATTERN = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$';
+
+    public loginForm: FormGroup;
     public validation_messages;
-    constructor(public formBuilder: FormBuilder,
-                public alertController: AlertController,
-                private router: Router,
-                public auth: AuthService) { }
+
+    constructor(public formBuilder: FormBuilder, public alertController: AlertController, private router: Router, public auth: AuthService,
+                public storageSrv: StorageService, public transService: TransactionsService) { }
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
@@ -45,6 +47,7 @@ export class LoginPage implements OnInit {
       };
   }
     get email() { return this.loginForm.get('email'); }
+
     get password() { return this.loginForm.get('password'); }
 
     getErrorMessage(name: string): any {
@@ -54,15 +57,25 @@ export class LoginPage implements OnInit {
         });
         return res[0];
     }
+
     submitLogin(): void {
         this.auth.loginUser(this.email.value, this.password.value).subscribe( (value: any) => {
                 console.log(value);
                 this.presentAlert('Message', 'Login is successful. Welcome.');
+                this.storageSrv.balance = value.user.balance;
+                this.storageSrv.email = value.user.email;
+                this.storageSrv.name = value.user.name;
+                this.storageSrv.userId = value.user._id;
+                this.storageSrv.token = value.token;
                 localStorage.setItem('x-access-token', value.token);
                 localStorage.setItem('balance', value.user.balance);
                 localStorage.setItem('id', value.user._id);
                 localStorage.setItem('name', value.user.name);
                 localStorage.setItem('email', value.user.email);
+                this.transService.balance = value.user.balance;
+                this.transService.email = value.user.email;
+                this.transService.id = value.user._id;
+                this.transService.token = value.token;
                 this.router.navigate(['main']);
             },
             error => {

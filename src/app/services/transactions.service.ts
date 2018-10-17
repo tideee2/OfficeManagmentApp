@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
+import {StorageService} from './storage.service';
+import {Transaction} from '../models/transaction';
 
 @Injectable({
     providedIn: 'root'
@@ -10,9 +12,16 @@ export class TransactionsService {
     private httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    public token: string;
-    constructor(public http: HttpClient,
 
+    public token: string;
+    public balance: number;
+    public name: string;
+    public email: string;
+    public id: string;
+    public transactions: Transaction[];
+
+    constructor(public http: HttpClient,
+                public storageSrv: StorageService
                 ) {
         this.token = localStorage.getItem('x-access-token');
     }
@@ -33,16 +42,19 @@ export class TransactionsService {
             'Something bad happened; please try again later.');
     }
 
-    getTransactions(type: string): Observable<any> {
-        // const GET_TRANSACTION_URL = `${this.MAIN_URL}transactions/?type=${type}&start=${start}&finish=${finish}&page=${page}`;
-
-        return this.http.get(this.MAIN_URL + `transactions/?type=${type}`, { headers: new HttpHeaders({ 'x-access-token': this.token }) });
+    getTransactions(type: string, page?: number): Observable<any> {
+        // page = page || 1;
+        return this.http.get(
+            this.MAIN_URL + `transactions/?page=${page}`,
+            { headers: new HttpHeaders({ 'x-access-token': this.token })
+            });
     }
+
     addTransactions(description: string, type: string, cost: number): Observable<any> {
         console.log(description, type, cost);
         console.log(this.MAIN_URL + 'transactions');
         console.log(this.token);
-        return this.http.post(this.MAIN_URL + 'transactions', {'description': description, 'type': type, 'cost': cost},
+        return this.http.post(this.MAIN_URL + 'transactions', {'description': description, 'type': type, 'cost': cost * 1},
             { headers: new HttpHeaders({ 'x-access-token': this.token }) });
     }
 }

@@ -1,7 +1,9 @@
 import {Component, OnInit, Renderer, ViewChild} from '@angular/core';
-import {Content, InfiniteScroll, ModalController} from '@ionic/angular';
+import {App, Content, InfiniteScroll, ModalController} from '@ionic/angular';
 import {AddPurchasePage} from '../add-purchase/add-purchase.page';
 import {TransactionsService} from '../services/transactions.service';
+import {StorageService} from '../services/storage.service';
+import {findIndex} from 'rxjs/operators';
 
 @Component({
     selector: 'app-main',
@@ -10,69 +12,94 @@ import {TransactionsService} from '../services/transactions.service';
 })
 export class MainPage implements OnInit {
     @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-    public items = [];
-    public token: string;
-    @ViewChild(Content)
-    content: Content;
+    @ViewChild(Content) content: Content;
 
-    constructor(public modalController: ModalController,
-                public transService: TransactionsService,
-                public renderer: Renderer) {
-        this.token = localStorage.getItem('x-access-token');
+    public token: string;
+    public balance: number;
+    public page = 1;
+    private app: App = null;
+
+    public items = [];
+
+    constructor(public modalController: ModalController, public transService: TransactionsService, public renderer: Renderer,
+                public storageSrv: StorageService) {
+        console.log(this.transService.balance);
+        this.transService.balance = this.transService.balance || parseInt(localStorage.getItem('balance'), 10);
 
     }
 
-    ngOnInit() {
+    ionViewWillEnter() {
+        this.balance = this.storageSrv.balance;
+    }
 
-        window.onscroll = function (e) {
-            console.log('fff');
-        };
-        this.transService.getTransactions('')
+    ionAfterViewInit() {
+        // this.content = this.app.getComponent('qq');
+
+    }
+
+    increase() {
+        this.transService.balance += 150;
+    }
+    ngOnInit() {
+        // let q = document.addEventListener('scroll', function()  {console.log('fff'); });
+        // console.log(q);
+
+
+        // this.enableScrollListener();
+        this.token = this.storageSrv.token;
+        this.balance = parseInt(localStorage.getItem('balance'), 10);
+        // this.balance = this.storageSrv.balance;
+
+        // window.onscroll = function (e) {
+        //     console.log('fff');
+        // };
+        this.transService.getTransactions('', 1)
             .subscribe((data) => {
-                    console.log(data);
-                    this.items = data;
-                    this.items.sort((a, b) => {
-                            return -(new Date(a.date)).getTime() + (new Date(b.date)).getTime();
-                        });
-                    console.log(this.items);
+                    this.transService.transactions = data;
                 },
                 error => {
                     console.log(error);
                 });
     }
 
-    ionViewDidLoad() {
-
-    }
-
-    // getItems() {
-    //     this.transService.getTransactions('decrease', '2018-01-14', '2018-12-1', 1, this.token)
-    //         .subscribe((data) => {
-    //                 console.log(data);
-    //                 this.items = data;
-    //             },
-    //             error => {
-    //                 console.log(error);
-    //             });
-    //     return this.items;
-    // }
-
     loadData(event) {
         setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
-                this.items.push(this.items.length);
-            }
+            this.page++;
+            this.transService.getTransactions('', this.page)
+                .subscribe((data) => {
+                        this.transService.transactions = this.transService.transactions.concat(data);
+                        if (data.length < 10) {
+                            this.infiniteScroll.disabled = true;
+                            this.page--;
+                        }
+                    },
+                    error => {
+                        console.log(error);
+                    });
             console.log('Async operation has ended');
             event.target.complete();
         }, 1000);
     }
 
     async addPurchase() {
-        const modal = await this.modalController.create({
-            component: AddPurchasePage,
-            componentProps: {data: this.items}
-        });
-        return await modal.present();
+        // console.log(this.content.scrollByPoint(100, 200, 2000));
+        const x: HTMLElement = document.querySelectorAll('ion-header')[0];
+        console.log(x.className);
+        // console.log(x.content)
+        x.className.concat(' haeder-el');
+        x.className = (x.className.indexOf('hide-header') >= 0) ? x.className.replace(' hide-header', '') :
+            x.className.concat(' hide-header');
+
+        // this.content.ionScroll.subscribe(($event: any) => {
+        //     const scrollTop: number = $event.scrollTop;
+        //     console.log('scrollTop');
+        // });
+
+        // const modal = await this.modalController.create({
+        //     component: AddPurchasePage,
+        //     componentProps: {data: this.items, money: this.balance}
+        // });
+        // return await modal.present();
     }
 
     onContentScroll() {
@@ -80,15 +107,24 @@ export class MainPage implements OnInit {
     }
 
     qq(event) {
-        // console.log(this);
-        let x: Element;
-        x = document.getElementsByClassName('list')[0];
-        document.getElementsByClassName('price-card')[0].classList.add('anim');
-        document.getElementsByClassName('top-price')[0].classList.add('anim2');
-        document.getElementsByClassName('title-top')[0].classList.add('anim2');
+        console.log(event);
+        console.log('event');
+        // console.log(this.renderer.);
+        // console.log(this.content.scrollToTop(1000).then(() => console.log('ff')));
+
+        // console.log('ccc');
+        // const x: HTMLElement = document.querySelectorAll('ion-header')[0];
+        // console.log(x.className);
+        // x.className.concat(' haeder-el');
+        // x.className = (x.className.indexOf('hide-header') >= 0) ? x.className.replace(' hide-header', '') :
+        //     x.className.concat(' hide-header');
     }
 
     swipeAll(event: any): any {
         console.log('event');
+    }
+
+    f1() {
+        console.log('zzz');
     }
 }

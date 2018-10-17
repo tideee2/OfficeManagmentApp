@@ -31,6 +31,10 @@
                     <ion-label>Amount</ion-label>
                     <ion-input name="cost" formControlName="cost" placeholder=""></ion-input>
                 </ion-item>
+                <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" color="danger"
+                     class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('cost') }}</span>
+                </div>
                 <ion-item>
                     <ion-button (click)="submitPurchase()">Submit</ion-button>
                 </ion-item>
@@ -48,10 +52,22 @@
                     <ion-label>Comment</ion-label>
                     <ion-input name="description" formControlName="description"></ion-input>
                 </ion-item>
+                <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" color="danger"
+                         class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('cost') }}</span>
+                </div>
+                <div *ngIf="description.invalid && (description.dirty || description.touched)" color="danger" class="alert alert-danger">
+                    <span class="error-msg">{{ getErrorMessage('description') }}</span>
+                </div>
                 <ion-item>
                     <ion-button (click)="submitPurchase()">Submit</ion-button>
                 </ion-item>
             </ion-item-group>
         </form>
     </ion-list>
+    <ion-fab class="cancel-fab" vertical="bottom" horizontal="end" slot="fixed">
+        <button class="cancel-btn" color="light" routerDirection="forward" (click)="cancel()">
+            Cancel
+        </button>
+    </ion-fab>
 </ion-content>

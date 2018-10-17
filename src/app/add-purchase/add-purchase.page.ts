@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {TransactionsService} from '../services/transactions.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {StorageService} from '../services/storage.service';
 
 @Component({
     selector: 'app-add-purchase',
@@ -9,13 +10,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     styleUrls: ['./add-purchase.page.scss'],
 })
 export class AddPurchasePage implements OnInit {
+    @Input() money: any;
+    @Input() data: any;
+
     public transactionType = '';
     public transactionForm: FormGroup;
     public validation_messages;
-    @Input() data: any;
+
     constructor(public modalController: ModalController,
                 public transService: TransactionsService,
-                public formBuilder: FormBuilder) {
+                public formBuilder: FormBuilder,
+                public storageSrv: StorageService) {
     }
 
     ngOnInit() {
@@ -44,11 +49,19 @@ export class AddPurchasePage implements OnInit {
             },
         };
     }
-    get cost() { return this.transactionForm.get('cost'); }
-    get description() { return this.transactionForm.get('description'); }
+
+    get cost() {
+        return this.transactionForm.get('cost');
+    }
+
+    get description() {
+        return this.transactionForm.get('description');
+    }
+
     set cost(val) {
         this.transactionForm.value.cost = val;
     }
+
     getErrorMessage(name: string): any {
         const res = [];
         Object.keys(this[name].errors).forEach((error) => {
@@ -56,15 +69,25 @@ export class AddPurchasePage implements OnInit {
         });
         return res[0];
     }
+
     submitPurchase() {
-        this.transService.addTransactions(this.description.value, this.transactionType, this.cost.value)
+        this.transService.addTransactions(this.description.value || 'balance increase', this.transactionType, this.cost.value)
             .subscribe(value => {
-                console.log(value);
-                this.data.unshift(value);
-            },
-            error => {
-                console.log(error);
+                    console.log(value);
+                    const addCost = +localStorage.getItem('balance') + ((this.transactionType === 'increase')
+                        ? +this.cost.value : 0 - +this.cost.value);
+                    localStorage.setItem('balance', '' + addCost);
+                    this.data.unshift(value);
+                    this.storageSrv.balance = addCost;
+                    this.transService.balance = addCost;
+                },
+                error => {
+                    console.log(error);
                 });
+        this.modalController.dismiss();
+    }
+
+    cancel(): void {
         this.modalController.dismiss();
     }
 }

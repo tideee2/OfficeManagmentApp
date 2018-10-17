@@ -65,3 +65,14 @@
 .increase-color{
   color: green;
 }
+.hide-header {
+  margin-top: -56px;
+  transition: margin-top 700ms;
+}
+.show-header {
+  margin-top: 0px;
+  transition: margin-top 700ms;
+}
+.header {
+  transition: margin-top 700ms;;
+}

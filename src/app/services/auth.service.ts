@@ -8,8 +8,6 @@ import {catchError, map, tap} from 'rxjs/operators';
 })
 export class AuthService {
     private MAIN_URL = 'http://5.101.180.10:3005/';
-    private REGISTER_URL = 'http://5.101.180.10:3005/transactions';
-    private LOGIN_URL = 'http://5.101.180.10:3005/auth/login';
 
     private httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})

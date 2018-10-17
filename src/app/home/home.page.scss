@@ -1,1 +1,120 @@
+//
+//
+//    .scroll-content {
+//      display: flex;
+//      justify-content: center;
+//      align-items: center;
+//    }
+//
+//    #bars {
+//      //height: 80%;
+//      margin-left: 50%;
+//      .cls-1 {
+//        opacity: 0;
+//        transform: rotate3d(1, 1, 0, 50deg);
+//        animation: 1s 0.2s ease fadeInAndSpin;
+//        animation-fill-mode: forwards;
+//
+//      }
+//
+//      .cls-2 {
+//        opacity: 0;
+//        transform: rotate3d(1, 1, 0, 50deg);
+//        animation: 1s 0.4s ease fadeInAndSpin;
+//        animation-fill-mode: forwards;
+//      }
+//
+//      .cls-3 {
+//        opacity: 0;
+//        transform: rotate3d(1, 1, 0, 50deg);
+//        animation: 1s 0.6s ease fadeInAndSpin;
+//        animation-fill-mode: forwards;
+//      }
+//
+//      .cls-4 {
+//        opacity: 0;
+//        transform: rotate3d(1, 1, 0, 50deg);
+//        animation: 1s 0.8s ease fadeInAndSpin;
+//        animation-fill-mode: forwards;
+//      }
+//
+//      .cls-5, .cls-6 {
+//        opacity: 0;
+//        animation: 2s 1.5s linear fadeIn;
+//        animation-fill-mode: forwards;
+//      }
+//
+//    }
+//
+//
+////@keyframes fadeInAndSpin {
+////
+////  100% {
+////    opacity: 1;
+////    transform: rotate3d(1, 1, 0, 0deg);
+////  }
+////
+////}
+////
+////@keyframes fadeIn {
+////
+////  100% {
+////    opacity: 1;
+////  }
+////
+////}
 
+.bubble {
+  //stroke: green;
+  //stroke-width: 10px;
+  //animation: 5s 0.5s linear test1 infinite;
+}
+@keyframes test1 {
+  from {
+    transform: translateY(-65px);
+  }
+  to {
+    transform: translateY(220px);
+  }
+}
+.bubble {
+  stroke-dasharray: 262;
+  //stroke-dashoffset: 262;
+  animation: dash2;
+  //animation-delay: 5s;
+  animation-duration: 5s;
+}
+.bottle {
+  //stroke-dashoffset: 4019;
+  stroke-dasharray: 4019;
+  animation: dash 15s linear;
+}
+@keyframes dash {
+  from {
+    stroke-dashoffset: 4019;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes dash2 {
+  from {
+    stroke-dashoffset: 262;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.max-animation {
+  stroke-dashoffset: 2510.236;
+  animation: max-anim 25s linear;
+  stroke-dasharray: 2510.236;
+}
+@keyframes max-anim {
+  from {
+    stroke-dashoffset: 2510.236;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
