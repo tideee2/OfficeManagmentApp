@@ -1,78 +1,169 @@
-//.inf-list{
-//  position: absolute;
-//  top:50vh;
-//  width:85%;
-//}
-//.list{
-//  position:absolute;
-//  top:30%;
-//}
-//.price-card{
-//  height:25%;
-//  position: absolute;
-//
-//  z-index: 1000;
-//  ion-card-content{
-//    display: flex;
-//    justify-content: center;
-//    text-align: center;
-//    font-size: 3em;
-//    ion-label{
-//      width:100%;
-//    }
-//  }
-//}
-//.top-price{
-//  transform: translate3d(0,50px,0);
-//  opacity: 0;
-//  text-align: center;
-//}
-//@keyframes bounceOutUp {
-//  0% {
-//    transform: translate3d(0, 0, 0);
-//  }
-//  to {
-//    opacity: 0;
-//    transform: translate3d(0, -100px, 0);
-//  }
-//}
-//@keyframes bounceOutIn {
-//  0% {
-//    opacity: 0;
-//    transform: translate3d(0, 50px, 0);
-//  }
-//  to {
-//    opacity: 1;
-//    transform: translate3d(0, 0, 0);
-//  }
-//}
-//.nodisplay{
-//  opacity: 0;
-//}
-//.anim11 {
-//  animation-name: bounceOutUp;
-//  animation-fill-mode: forwards;
-//  animation-duration: 1s;
-//}
-//.anim211 {
-//  animation-name: bounceOutIn;
-//  animation-fill-mode: forwards;
-//  animation-duration: 1s;
-//}
-.decrease-color{
+:root {
+  //--inner-border-width: 0 0 0 0!important;
+}
+
+ion-content {
+  background-color: rgb(51, 51, 61);
+  ion-card {
+    box-shadow: none !important;
+    //border: 1px solid red;
+  }
+  .inf-list {
+    color: #000;
+    animation: 0.7s slideInUp linear;
+    .transaction-containter {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 15px;
+      width: 100%;
+      align-items: center;
+    }
+    .list-title {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      font-size: 20px;
+    }
+    .col div {
+      padding: 5px;
+    }
+    .input-wrapper {
+      border: 1px solid #fff !important;
+    }
+    .item-inner {
+      border: none !important;
+      background: red;
+    }
+    .datetime {
+      color: #919191;
+    }
+  }
+  :host {
+    --ion-color-base: red;
+  }
+  .add-btn {
+    bottom: 10vh;
+    ion-fab-button{
+      button.fab-button-native{
+        background: red!important;
+      }
+      svg {
+        fill: green;
+      }
+    }
+  }
+}
+
+.decrease-color {
   color: red;
 }
-.increase-color{
+
+.increase-color {
   color: green;
 }
+
 .hide-header {
   margin-top: -56px;
   transition: margin-top 700ms;
 }
+
 .show-header {
   margin-top: 0px;
   transition: margin-top 700ms;
 }
+
 .header {
   transition: margin-top 700ms;;
+}
+
+#circle-line {
+  stroke-dasharray: 870.015;
+  //stroke-dashoffset: 870.015;
+  animation-delay: 2s;
+  animation: circle-anim 1s linear;
+  stroke: #04b97f;
+  stroke-width: 8px;
+  fill: transparent;
+}
+
+@keyframes circle-anim {
+  from {
+    stroke-dashoffset: 870.015;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes qq {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(100px, 0);
+  }
+}
+
+.inner-scroll.scroll-y.overscroll {
+  padding: 0;
+}
+
+.inf-list {
+  width: 110%;
+  padding: 0;
+  margin: 0 0 0 -16px;
+  border-radius: 25px 25px 0 0;
+}
+
+.price-card {
+  position: relative;
+  height: 42vh;
+  .price-card-content {
+    color: #fff;
+    position: absolute;
+    top: 14vh;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    animation: zoomIn 1s;
+    div {
+      margin-bottom: 10px;
+    }
+    //.price-card-title {
+    //  animation: zoomIn 0.7s;
+    //}
+    .price-card-cost {
+      //animation: zoomIn 1s;
+      font-size: 30px;
+    }
+    //.price-card-inf {
+    //  animation: zoomIn 1.3s;
+    //}
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ion-infinite-scroll {
+  background: #fff;
 }

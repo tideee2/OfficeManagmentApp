@@ -18,6 +18,7 @@ export class MainPage implements OnInit {
     public balance: number;
     public page = 1;
     private app: App = null;
+    public showEditButton;
 
     public items = [];
 
@@ -25,7 +26,7 @@ export class MainPage implements OnInit {
                 public storageSrv: StorageService) {
         console.log(this.transService.balance);
         this.transService.balance = this.transService.balance || parseInt(localStorage.getItem('balance'), 10);
-
+        console.log(this.transService.transactions);
     }
 
     ionViewWillEnter() {
@@ -56,6 +57,7 @@ export class MainPage implements OnInit {
         this.transService.getTransactions('', 1)
             .subscribe((data) => {
                     this.transService.transactions = data;
+                    console.log(data);
                 },
                 error => {
                     console.log(error);
@@ -83,23 +85,23 @@ export class MainPage implements OnInit {
 
     async addPurchase() {
         // console.log(this.content.scrollByPoint(100, 200, 2000));
-        const x: HTMLElement = document.querySelectorAll('ion-header')[0];
-        console.log(x.className);
+        // const x: HTMLElement = document.querySelectorAll('ion-header')[0];
+        // console.log(x.className);
         // console.log(x.content)
-        x.className.concat(' haeder-el');
-        x.className = (x.className.indexOf('hide-header') >= 0) ? x.className.replace(' hide-header', '') :
-            x.className.concat(' hide-header');
+        // x.className.concat(' haeder-el');
+        // x.className = (x.className.indexOf('hide-header') >= 0) ? x.className.replace(' hide-header', '') :
+        //     x.className.concat(' hide-header');
 
-        // this.content.ionScroll.subscribe(($event: any) => {
-        //     const scrollTop: number = $event.scrollTop;
-        //     console.log('scrollTop');
-        // });
+        this.content.ionScroll.subscribe(($event: any) => {
+            const scrollTop: number = $event.scrollTop;
+            console.log('scrollTop');
+        });
 
-        // const modal = await this.modalController.create({
-        //     component: AddPurchasePage,
-        //     componentProps: {data: this.items, money: this.balance}
-        // });
-        // return await modal.present();
+        const modal = await this.modalController.create({
+            component: AddPurchasePage,
+            componentProps: {data: this.items, money: this.balance}
+        });
+        return await modal.present();
     }
 
     onContentScroll() {
@@ -126,5 +128,9 @@ export class MainPage implements OnInit {
 
     f1() {
         console.log('zzz');
+    }
+
+    editPurchase(transaction) {
+        this.showEditButton
     }
 }

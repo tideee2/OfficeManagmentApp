@@ -1,4 +1,4 @@
-<ion-header swipeAll #head>
+<ion-header swipeAll #head *ngIf="false">
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
@@ -10,18 +10,63 @@
 
 <ion-content padding (ionScroll)="qq($event)" no-padding hide-header [header]="head" overflow-scroll="true"
              appHideHeader="scrollY" id="qq">
-    <ion-card class="price-card" (swiperight)="swipeAll($event)">
-        <ion-card-content>
-            <ion-label color="success">{{this.transService.balance}} UAH</ion-label>
+    <ion-card class="svg-card">
+        <ion-card-content class="price-card">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 preserveAspectRatio="xMidYMid meet" viewBox="160 0 300 460" width="100%" height="400" fill="blue">
+                <defs>
+                    <path d="M173.08 145.38C173.08 68.97 235.12 6.92 311.54 6.92C387.96 6.92 450 68.97 450 145.38C450
+                    221.8 387.96 283.85 311.54 283.85C235.12 283.85 173.08 221.8 173.08 145.38Z" id="circle-line">
+                    </path>
+                </defs>
+                <use xlink:href="#circle-line"></use>
+            </svg>
+            <div class="price-card-content">
+                <div class="price-card-title">
+                    Total
+                </div>
+                <div class="price-card-cost">
+                    {{transService.balance}} грн
+                </div>
+                <div class="price-card-inf">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                </div>
+            </div>
         </ion-card-content>
     </ion-card>
+    <!--<ion-card>-->
+    <!--<ion-card-header>-->
+    <!--Total-->
+    <!--</ion-card-header>-->
+    <!--<ion-card-content>-->
+    <!--$ {{transService.balance}}-->
+    <!--</ion-card-content>-->
+    <!--</ion-card>-->
+    <!--<ion-card class="price-card" (swiperight)="swipeAll($event)">-->
+    <!--<ion-card-content>-->
+    <!--<ion-label color="success">{{this.transService.balance}} UAH</ion-label>-->
+    <!--</ion-card-content>-->
+    <!--</ion-card>-->
     <ion-card class="inf-list">
         <ion-list>
-            <ion-item *ngFor="let x of this.transService.transactions; let i = index">
-                <div>{{i+1}})</div>
-                <div>{{x.description !== null ? x.description : ''}}:</div>
-                <div [className]="x.type === 'decrease' ? 'decrease-color' : 'increase-color'">{{x.cost}}</div>
-            </ion-item>
+            <div class="list-title"><span>Transaction history</span>
+                <ion-icon name="md-archive" slot="end"></ion-icon>
+            </div>
+            <div *ngFor="let x of this.transService.transactions; let i = index">
+                <!--<div>{{i+1}})</div>-->
+                <div class="transaction-containter" (click)="showEditButton = !showEditButton">
+                    <div class="col">
+                        <div class="description">{{x.description !== null ? x.description : ''}}</div>
+                        <div class="datetime">{{x.date | date }}</div>
+                    </div>
+                    <div class="col" *ngIf="!showEditButton">
+                        <div class="cost" [className]="x.type === 'decrease' ? 'decrease-color' : 'increase-color'">
+                            {{x.cost}} грн
+                        </div>
+                        <div *ngIf="showEditButton">fdgdfgdff</div>
+                    </div>
+                </div>
+            </div>
         </ion-list>
 
         <ion-infinite-scroll threshold="20px" (ionInfinite)="loadData($event)">
@@ -31,9 +76,19 @@
             </ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </ion-card>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-fab-button routerDirection="forward" (click)="addPurchase()">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="add-btn">
+        <ion-fab-button routerDirection="forward" (click)="addPurchase()" color="warning">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-icon name="search"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
