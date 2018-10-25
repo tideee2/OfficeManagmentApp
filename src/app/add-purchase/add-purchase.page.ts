@@ -90,4 +90,8 @@ export class AddPurchasePage implements OnInit {
     cancel(): void {
         this.modalController.dismiss();
     }
+
+    contentClick() {
+        console.log(this.transactionType);
+    }
 }

@@ -4,52 +4,30 @@
             <ion-back-button></ion-back-button>
 
         </ion-buttons>
-        <ion-title>addPurchase</ion-title>
+        <ion-title color="white" slot="start">Add transaction</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding (click)="contentClick()">
+    <ion-list class="select-container">
+        <ion-item no-padding no-border>
+            <ion-label [hidden]="true">Select type</ion-label>
+            <ion-select placeholder="Select One" slot="start" [(ngModel)]="transactionType">
+                <ion-select-option value="decrease">Outcoming</ion-select-option>
+                <ion-select-option value="increase">Incoming</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
     <ion-list>
-        <ion-radio-group [(ngModel)]="transactionType">
-            <ion-item>
-                <ion-label>Add money</ion-label>
-                <ion-radio slot="start" value="increase"></ion-radio>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Add purchase</ion-label>
-                <ion-radio slot="start" value="decrease"></ion-radio>
-            </ion-item>
-        </ion-radio-group>
         <form [formGroup]="transactionForm">
-            <ion-item-group *ngIf="transactionType == 'increase'">
-                <ion-item-divider>
-                    <ion-label>Add money</ion-label>
-                </ion-item-divider>
-
-                <ion-item>
-                    <ion-label>Amount</ion-label>
+            <ion-item-group>
+                <ion-item no-padding no-border>
+                    <ion-label>Price</ion-label>
                     <ion-input name="cost" formControlName="cost" placeholder=""></ion-input>
                 </ion-item>
-                <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" color="danger"
-                     class="alert alert-danger">
-                    <span class="error-msg">{{ getErrorMessage('cost') }}</span>
-                </div>
-                <ion-item>
-                    <ion-button (click)="submitPurchase()">Submit</ion-button>
-                </ion-item>
-            </ion-item-group>
-            <ion-item-group *ngIf="transactionType == 'decrease'">
-                <ion-item-divider>
-                    <ion-label>Add purchase</ion-label>
-                </ion-item-divider>
-
-                <ion-item>
-                    <ion-label>Amount</ion-label>
-                    <ion-input name="cost" formControlName="cost" placeholder=""></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Comment</ion-label>
+                <ion-item no-padding no-border>
+                    <ion-label position="floating">Comment</ion-label>
                     <ion-input name="description" formControlName="description"></ion-input>
                 </ion-item>
                 <div *ngIf="cost.invalid && (cost.dirty || cost.touched)" color="danger"

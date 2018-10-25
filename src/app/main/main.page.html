@@ -8,7 +8,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding (ionScroll)="qq($event)" no-padding hide-header [header]="head" overflow-scroll="true"
+<ion-content no-padding (ionScroll)="qq($event)" hide-header [header]="head" overflow-scroll="true"
              appHideHeader="scrollY" id="qq">
     <ion-card class="svg-card">
         <ion-card-content class="price-card">
@@ -47,35 +47,39 @@
     <!--<ion-label color="success">{{this.transService.balance}} UAH</ion-label>-->
     <!--</ion-card-content>-->
     <!--</ion-card>-->
-    <ion-card class="inf-list">
-        <ion-list>
-            <div class="list-title"><span>Transaction history</span>
-                <ion-icon name="md-archive" slot="end"></ion-icon>
-            </div>
-            <div *ngFor="let x of this.transService.transactions; let i = index">
-                <!--<div>{{i+1}})</div>-->
-                <div class="transaction-containter" (click)="showEditButton = !showEditButton">
-                    <div class="col">
-                        <div class="description">{{x.description !== null ? x.description : ''}}</div>
-                        <div class="datetime">{{x.date | date }}</div>
-                    </div>
-                    <div class="col" *ngIf="!showEditButton">
-                        <div class="cost" [className]="x.type === 'decrease' ? 'decrease-color' : 'increase-color'">
-                            {{x.cost}} грн
+    <section padding>
+        <ion-card class="inf-list">
+            <ion-list>
+                <div class="list-title"><span>Transaction history</span>
+                    <ion-icon name="ios-funnel" slot="end"></ion-icon>
+                </div>
+                <div *ngFor="let x of this.transService.transactions; let i = index">
+                    <!--<div>{{i+1}})</div>-->
+                    <div class="transaction-container" (click)="showButton(container)" #container tappable>
+                        <div class="col">
+                            <div class="description">{{x.description !== null ? x.description : ''}}</div>
+                            <div class="datetime">{{x.date | date }}</div>
                         </div>
-                        <div *ngIf="showEditButton">fdgdfgdff</div>
+                        <div class="col" *ngIf="!showEditButton">
+                            <div [className]="'cost ' + (x.type === 'decrease' ? 'decrease-color' : 'increase-color')">
+                                {{x.cost}} грн
+                            </div>
+                            <div class="edit-button">
+                                <ion-icon name="md-create"></ion-icon>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </ion-list>
+            </ion-list>
 
-        <ion-infinite-scroll threshold="20px" (ionInfinite)="loadData($event)">
-            <ion-infinite-scroll-content
-                    loadingSpinner="bubbles"
-                    loadingText="Loading more data...">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-    </ion-card>
+            <ion-infinite-scroll threshold="20px" (ionInfinite)="loadData($event)">
+                <ion-infinite-scroll-content
+                        loadingSpinner="bubbles"
+                        loadingText="Loading more data...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+        </ion-card>
+    </section>
     <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="add-btn">
         <ion-fab-button routerDirection="forward" (click)="addPurchase()" color="warning">
             <ion-icon name="add"></ion-icon>
@@ -84,11 +88,11 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <ion-buttons slot="start">
+        <ion-button color="transparent" slot="start" class="footer-btn">
             <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
-        </ion-buttons>
-        <ion-buttons slot="end">
+        </ion-button>
+        <ion-button color="transparent" slot="end" class="footer-btn">
             <ion-icon name="search"></ion-icon>
-        </ion-buttons>
+        </ion-button>
     </ion-toolbar>
 </ion-footer>

@@ -1,23 +1,52 @@
 :root {
   //--inner-border-width: 0 0 0 0!important;
 }
-
+$button-md-box-shadow : none;
 ion-content {
+  section {
+    padding-bottom: 0;
+  }
   background-color: rgb(51, 51, 61);
   ion-card {
     box-shadow: none !important;
     //border: 1px solid red;
   }
   .inf-list {
+    .ion-list {
+      min-height:200vh;
+    }
     color: #000;
     animation: 0.7s slideInUp linear;
-    .transaction-containter {
+    .transaction-container {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       padding: 10px 15px;
       width: 100%;
       align-items: center;
+      &.enable-edit {
+        .edit-button {
+          display: block;
+        }
+        .cost {
+          display: none;
+        }
+      }
+      .cost {
+        display: block;
+      }
+      .edit-button {
+        display: none;
+        color: #fff;
+        background: #FFCB37;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin-right: 15px;
+        ion-icon {
+          font-size: 20px;
+        }
+      }
     }
     .list-title {
       display: flex;
@@ -33,7 +62,6 @@ ion-content {
     }
     .item-inner {
       border: none !important;
-      background: red;
     }
     .datetime {
       color: #919191;
@@ -43,14 +71,30 @@ ion-content {
     --ion-color-base: red;
   }
   .add-btn {
-    bottom: 10vh;
-    ion-fab-button{
-      button.fab-button-native{
-        background: red!important;
+    bottom: -4vh;
+    ion-fab-button {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      &::after {
+        content: '';
+        background-color: #fff;
+        position: absolute;
+        top: 42%;
+        left: -10%;
+        width: 68px;
+        height: 39px;
+        border-bottom-left-radius: 68px;
+        border-bottom-right-radius: 68px;
+        z-index: -1;
       }
-      svg {
-        fill: green;
-      }
+    }
+    button.fab-button-native {
+      background: red !important;
+    }
+    svg {
+      fill: green;
     }
   }
 }
@@ -153,6 +197,7 @@ ion-content {
     opacity: 1;
   }
 }
+
 @keyframes slideInUp {
   from {
     transform: translate3d(0, 100%, 0);
@@ -164,6 +209,31 @@ ion-content {
   }
 }
 
-.ion-infinite-scroll {
-  background: #fff;
+ion-infinite-scroll-content {
+  background: #fff !important;
+
+}
+
+ion-infinite-scroll {
+
+}
+
+:host {
+  --my-bg: red;
+  --ion-toolbar-background-color: rgb(51, 51, 61);
+  --buttonface: red;
+}
+
+ion-footer {
+  ion-toolbar {
+    ion-button {
+      color: green;
+      .footer-btn {
+        border: none!important;
+        background: var(--buttonface, #f00);
+        //background-color:var(--my-bg);
+      }
+    }
+
+  }
 }

@@ -18,7 +18,8 @@ export class MainPage implements OnInit {
     public balance: number;
     public page = 1;
     private app: App = null;
-    public showEditButton;
+    public showEditButton = false;
+    public containerClass = 'transaction-container';
 
     public items = [];
 
@@ -80,7 +81,7 @@ export class MainPage implements OnInit {
                     });
             console.log('Async operation has ended');
             event.target.complete();
-        }, 1000);
+        }, 33331000);
     }
 
     async addPurchase() {
@@ -128,6 +129,12 @@ export class MainPage implements OnInit {
 
     f1() {
         console.log('zzz');
+    }
+
+    showButton(x: HTMLElement) {
+        document.querySelectorAll('.transaction-container').forEach(q => { if (q !== x) {q.className = 'transaction-container'; } });
+        // x.className = (!~(x.className.indexOf('enable-edit'))) ? 'transaction-container enable-edit' : 'transaction-container' ;
+        x.className = (!~(x.className.indexOf('enable-edit'))) ? 'transaction-container enable-edit' : 'transaction-container' ;
     }
 
     editPurchase(transaction) {
