@@ -24,3 +24,16 @@ ion-item.align-button.in-list.item .input-wrapper{
 //    }
 //  }
 //}
+.modal.modal-ios.hydrated.show-modal {
+  /deep/.select-text {
+    //--color: red;
+    background-color: greenyellow;
+    color: red;
+  }
+}
+$select-md-placeholder-color: pink;
+::ng-deep .select-text {
+  --color: blue;
+  background-color: red!important;
+
+}

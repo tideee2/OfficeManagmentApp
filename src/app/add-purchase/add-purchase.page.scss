@@ -1,6 +1,4 @@
-app-add-purchase{
 
-}
 :host {
   --ion-toolbar-background-color: #383840;
 }
@@ -17,6 +15,7 @@ ion-header {
 }
 
 ion-content {
+  color: green;
   section {
     padding-bottom: 0;
   }
@@ -24,12 +23,9 @@ ion-content {
   ion-item {
     background: #33333D;
     --border-width: 0!important;
-    color: #a6a6a6;
+    color: #fff;
     ion-label {
       margin-left: 15px;
-    }
-    .select-text {
-      color: #fff!important;
     }
   }
   .alert {
@@ -46,9 +42,9 @@ ion-content {
       //--padding-start: 0;
     }
     ion-item {
-      border-bottom: 1px solid #a6a6a6;
+      border-bottom: 1px solid #fff;
       .input-wrapper {
-        color: #a6a6a6;
+        color: #fff;
       }
     }
 
@@ -60,5 +56,21 @@ ion-content {
     right: 20px;
     width: 100px;
     height: 50px;
+  }
+}
+ion-select {
+  --placeholder-color: #fff;
+  color: #fff;
+}
+ion-item {
+}
+div[name='description'] {
+  .cloned-input{
+    width:0!important;
+  }
+  .native-input {
+    transform: none;
+    width: 0;
+    height: 0;
   }
 }

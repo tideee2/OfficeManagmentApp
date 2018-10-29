@@ -12,7 +12,7 @@
     <ion-list class="select-container">
         <ion-item no-padding no-border>
             <ion-label [hidden]="true">Select type</ion-label>
-            <ion-select placeholder="Select One" slot="start" [(ngModel)]="transactionType">
+            <ion-select placeholder="Select One" slot="start" [(ngModel)]="transactionType" (click)="selectClick(select)" #select>
                 <ion-select-option value="decrease">Outcoming</ion-select-option>
                 <ion-select-option value="increase">Incoming</ion-select-option>
             </ion-select>

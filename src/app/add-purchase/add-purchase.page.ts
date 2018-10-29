@@ -3,6 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {TransactionsService} from '../services/transactions.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StorageService} from '../services/storage.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-add-purchase',
@@ -20,11 +21,12 @@ export class AddPurchasePage implements OnInit {
     constructor(public modalController: ModalController,
                 public transService: TransactionsService,
                 public formBuilder: FormBuilder,
-                public storageSrv: StorageService) {
+                public storageSrv: StorageService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-        console.log(this.data);
+        // console.log(this.data);
         this.transactionForm = this.formBuilder.group({
             cost: ['', Validators.compose([
                 Validators.required,
@@ -48,6 +50,14 @@ export class AddPurchasePage implements OnInit {
                 maxlength: 'Description cannot be more than 20 characters long'
             },
         };
+
+        // @ts-ignore
+        const x = this.route.snapshot.paramMap.params;
+
+        // this.transactionForm.controls.cost = x.cost;
+        this.transactionForm.setValue({cost: x.cost, description: x.description});
+        // this.cost = x.cost;
+        // this.description = x.description;
     }
 
     get cost() {
@@ -60,6 +70,10 @@ export class AddPurchasePage implements OnInit {
 
     set cost(val) {
         this.transactionForm.value.cost = val;
+    }
+
+    set description(val) {
+        this.transactionForm.value.description = val;
     }
 
     getErrorMessage(name: string): any {
@@ -93,5 +107,14 @@ export class AddPurchasePage implements OnInit {
 
     contentClick() {
         console.log(this.transactionType);
+        let x = document.querySelectorAll('.select-text');
+        console.log(x);
+        for (let i = 0; i < x.length; i++) {
+            console.log(x[i]);
+        }
+    }
+    selectClick(el) {
+
+        // console.log(el);
     }
 }

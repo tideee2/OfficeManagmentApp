@@ -83,6 +83,10 @@
   --ion-color-custom-contrast-rgb: 255,255,255;
   --ion-color-custom-shade: #1e1e1e;
   --ion-color-custom-tint: #383838;
+
+  --color: yellowgreen!important;
+  --ion-color: #75c9cc!important;
+  --icon-color: red;
 }
 
 .ion-color-transparent {
@@ -100,4 +104,9 @@
   --ion-color-contrast-rgb: #fff;
   --ion-color-shade: #fff;
   --ion-color-tint: #fff;
+}
+.select-text {
+  --color: yellowgreen!important;
+  --ion-color: #75c9cc!important;
+  --icon-color: red;
 }

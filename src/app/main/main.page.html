@@ -64,7 +64,7 @@
                             <div [className]="'cost ' + (x.type === 'decrease' ? 'decrease-color' : 'increase-color')">
                                 {{x.cost}} грн
                             </div>
-                            <div class="edit-button">
+                            <div class="edit-button" (click)="editPurchase(x)">
                                 <ion-icon name="md-create"></ion-icon>
                             </div>
                         </div>
@@ -87,12 +87,12 @@
     </ion-fab>
 </ion-content>
 <ion-footer>
-    <ion-toolbar>
-        <ion-button color="transparent" slot="start" class="footer-btn">
+    <ion-toolbar class="footer-toolbar">
+        <ion-buttons color="transparent" slot="start" class="footer-btn">
             <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
-        </ion-button>
-        <ion-button color="transparent" slot="end" class="footer-btn">
+        </ion-buttons>
+        <ion-buttons color="transparent" slot="end" class="footer-btn">
             <ion-icon name="search"></ion-icon>
-        </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-footer>

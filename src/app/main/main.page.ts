@@ -4,6 +4,7 @@ import {AddPurchasePage} from '../add-purchase/add-purchase.page';
 import {TransactionsService} from '../services/transactions.service';
 import {StorageService} from '../services/storage.service';
 import {findIndex} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-main',
@@ -24,7 +25,7 @@ export class MainPage implements OnInit {
     public items = [];
 
     constructor(public modalController: ModalController, public transService: TransactionsService, public renderer: Renderer,
-                public storageSrv: StorageService) {
+                public storageSrv: StorageService, public router: Router) {
         console.log(this.transService.balance);
         this.transService.balance = this.transService.balance || parseInt(localStorage.getItem('balance'), 10);
         console.log(this.transService.transactions);
@@ -81,7 +82,7 @@ export class MainPage implements OnInit {
                     });
             console.log('Async operation has ended');
             event.target.complete();
-        }, 33331000);
+        }, 1000);
     }
 
     async addPurchase() {
@@ -92,17 +93,17 @@ export class MainPage implements OnInit {
         // x.className.concat(' haeder-el');
         // x.className = (x.className.indexOf('hide-header') >= 0) ? x.className.replace(' hide-header', '') :
         //     x.className.concat(' hide-header');
-
+        this.router.navigate(['/addPurchase']);
         this.content.ionScroll.subscribe(($event: any) => {
             const scrollTop: number = $event.scrollTop;
             console.log('scrollTop');
         });
 
-        const modal = await this.modalController.create({
-            component: AddPurchasePage,
-            componentProps: {data: this.items, money: this.balance}
-        });
-        return await modal.present();
+        // const modal = await this.modalController.create({
+        //     component: AddPurchasePage,
+        //     componentProps: {data: this.items, money: this.balance}
+        // });
+        // return await modal.present();
     }
 
     onContentScroll() {
@@ -111,6 +112,7 @@ export class MainPage implements OnInit {
 
     qq(event) {
         console.log(event);
+
         console.log('event');
         // console.log(this.renderer.);
         // console.log(this.content.scrollToTop(1000).then(() => console.log('ff')));
@@ -132,12 +134,17 @@ export class MainPage implements OnInit {
     }
 
     showButton(x: HTMLElement) {
+        // @ts-ignore
         document.querySelectorAll('.transaction-container').forEach(q => { if (q !== x) {q.className = 'transaction-container'; } });
         // x.className = (!~(x.className.indexOf('enable-edit'))) ? 'transaction-container enable-edit' : 'transaction-container' ;
         x.className = (!~(x.className.indexOf('enable-edit'))) ? 'transaction-container enable-edit' : 'transaction-container' ;
     }
 
     editPurchase(transaction) {
-        this.showEditButton
+        this.router.navigate(['/addPurchase', transaction]);
+    }
+
+    test() {
+        console.log(123);
     }
 }
