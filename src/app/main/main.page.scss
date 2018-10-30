@@ -5,6 +5,7 @@ $button-md-box-shadow : none;
 ion-content {
   section {
     padding-bottom: 0;
+    margin-top: 45vh;
   }
   background-color: rgb(51, 51, 61);
   ion-card {
@@ -81,10 +82,10 @@ ion-content {
         content: '';
         background-color: #fff;
         position: absolute;
-        top: 48%;
+        top: 42%;
         left: -10%;
         width: 68px;
-        height: 34px;
+        height: 38px;
         border-bottom-left-radius: 68px;
         border-bottom-right-radius: 68px;
         z-index: -1;
@@ -100,6 +101,7 @@ ion-content {
 }
 .svg-card {
   //overflow: ;
+  margin:0 10%;
   overflow: unset;
 }
 .decrease-color {
@@ -162,14 +164,16 @@ ion-content {
   margin: 0 0 0 -16px;
   border-radius: 25px 25px 0 0;
 }
-
+.svg-card {
+  position: fixed;
+}
 .price-card {
   position: relative;
   height: 34vh;
   .price-card-content {
     color: #fff;
     position: absolute;
-    top: 14vh;
+    top: 12vh;
     left: 0;
     width: 100%;
     text-align: center;
@@ -214,7 +218,7 @@ ion-content {
 
 ion-infinite-scroll-content {
   background: #fff !important;
-
+    min-height:115px;
 }
 
 ion-infinite-scroll {
@@ -244,4 +248,7 @@ ion-footer {
     }
 
   }
+}
+.footer-md::before {
+  background: none;
 }

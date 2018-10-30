@@ -1,16 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>change</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title color="white">User settings</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-        <ion-list-header>
-            <ion-label>
-                Change data
-            </ion-label>
-        </ion-list-header>
         <form [formGroup]="changeForm">
             <div class="input-container">
                 <ion-item>
@@ -58,8 +56,12 @@
                 <ion-grid>
                     <ion-row justify-content-center>
                         <ion-col size="12">
-                            <ion-button slot="" size="normal" class="submit-btn ion-col-3" color="primary"
-                                        (click)="submitChange()">Submit
+                            <ion-button
+                                size="normal"
+                                class="submit-btn ion-col-3"
+                                color="orange"
+                                (click)="submitChange()">
+                                Submit
                             </ion-button>
                         </ion-col>
                     </ion-row>
@@ -67,4 +69,7 @@
             </ion-item>
         </form>
     </ion-list>
+    <ion-button (click)="logout()">
+        Log out
+    </ion-button>
 </ion-content>

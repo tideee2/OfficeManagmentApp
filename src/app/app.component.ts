@@ -22,5 +22,11 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+      this.platform.pause.subscribe(e => {
+        localStorage.clear();
+      });
+      window.addEventListener('close', () => {
+          localStorage.clear();
+      });
   }
 }

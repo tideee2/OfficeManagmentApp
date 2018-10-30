@@ -2,9 +2,8 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-
         </ion-buttons>
-        <ion-title color="white" slot="start">Add transaction</ion-title>
+            <ion-title color="white" slot="start">Add transaction</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -37,15 +36,11 @@
                 <div *ngIf="description.invalid && (description.dirty || description.touched)" color="danger" class="alert alert-danger">
                     <span class="error-msg">{{ getErrorMessage('description') }}</span>
                 </div>
-                <ion-item>
-                    <ion-button (click)="submitPurchase()">Submit</ion-button>
-                </ion-item>
             </ion-item-group>
         </form>
     </ion-list>
-    <ion-fab class="cancel-fab" vertical="bottom" horizontal="end" slot="fixed">
-        <button class="cancel-btn" color="light" routerDirection="forward" (click)="cancel()">
-            Cancel
-        </button>
-    </ion-fab>
+    <section>
+        <ion-button color="transparent" (click)="cancel()">Cancel</ion-button>
+        <ion-button color="orange" (click)="submitPurchase()" no-shadow>Submit</ion-button>
+    </section>
 </ion-content>

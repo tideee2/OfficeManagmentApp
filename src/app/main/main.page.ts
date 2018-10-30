@@ -144,7 +144,8 @@ export class MainPage implements OnInit {
         this.router.navigate(['/addPurchase', transaction]);
     }
 
-    test() {
-        console.log(123);
+    goToSettings () {
+        this.router.navigate(['/change', {}]);
+        console.log('qqq');
     }
 }

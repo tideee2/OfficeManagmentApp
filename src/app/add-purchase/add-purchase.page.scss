@@ -11,6 +11,8 @@ ion-header {
         text-align: left!important;
       }
     }
+    ion-item {
+    }
   }
 }
 
@@ -22,8 +24,8 @@ ion-content {
   background-color: #33333D;
   ion-item {
     background: #33333D;
-    --border-width: 0!important;
     color: #fff;
+    border-bottom: 1px solid #fff;
     ion-label {
       margin-left: 15px;
     }
@@ -39,7 +41,6 @@ ion-content {
       }
       margin-left: -15px;
       color: red!important;
-      //--padding-start: 0;
     }
     ion-item {
       border-bottom: 1px solid #fff;
@@ -47,7 +48,24 @@ ion-content {
         color: #fff;
       }
     }
-
+  }
+  .item-native {
+    border-bottom: 1px solid red!important;
+  }
+  ion-item-group {
+    height: 24vh;
+    background: #33333D;
+  }
+  ion-label {
+    color: #fff!important;
+  }
+  ion-button {
+    color: #fff!important;
+    font-weight: bold;
+    margin-right: 20px;
+    button.button-native {
+      box-shadow: none!important;
+    }
   }
 }
 

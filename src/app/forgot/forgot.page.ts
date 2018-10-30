@@ -46,16 +46,27 @@ export class ForgotPage implements OnInit {
     submitForgot(): void {
         this.auth.forgotPassword(this.email.value).subscribe( (value) => {
                 console.log(value);
+                console.log('qqq');
+                this.presentAlert('Message', 'Email has been sent');
+                this.router.navigate(['login']);
             },
             error => {
-                console.log('ff');
                 console.log(error);
-                if (error.status === 200) {
-                    // this.presentAlert('Message', error.error.text + ' and login');
-                    // this.router.navigate(['login']);
-                } else {
-                    // this.presentAlert('Error', error.error);
-                }
+                this.presentAlert('Error', error.statusText );
             });
+    }
+
+    async presentAlert(headerText: string, messageText: string) {
+        const alert = await this.alertController.create({
+            header: headerText,
+            // subHeader: 'Subtitle',
+            message: messageText,
+            buttons: [
+                {
+                    text: 'Ok',
+                }]
+        });
+
+        await alert.present();
     }
 }

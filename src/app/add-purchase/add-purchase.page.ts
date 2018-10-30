@@ -3,7 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {TransactionsService} from '../services/transactions.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StorageService} from '../services/storage.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-add-purchase',
@@ -22,7 +22,8 @@ export class AddPurchasePage implements OnInit {
                 public transService: TransactionsService,
                 public formBuilder: FormBuilder,
                 public storageSrv: StorageService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                public router: Router) {
     }
 
     ngOnInit() {
@@ -50,14 +51,13 @@ export class AddPurchasePage implements OnInit {
                 maxlength: 'Description cannot be more than 20 characters long'
             },
         };
+        console.log(this.route.snapshot.params._id);
 
-        // @ts-ignore
-        const x = this.route.snapshot.paramMap.params;
-
-        // this.transactionForm.controls.cost = x.cost;
-        this.transactionForm.setValue({cost: x.cost, description: x.description});
-        // this.cost = x.cost;
-        // this.description = x.description;
+        const x = this.route.snapshot.params;
+        if (x._id !== undefined) {
+            this.transactionForm.setValue({cost: x.cost, description: x.description});
+            this.transactionType = x.type;
+        }
     }
 
     get cost() {
@@ -91,30 +91,22 @@ export class AddPurchasePage implements OnInit {
                     const addCost = +localStorage.getItem('balance') + ((this.transactionType === 'increase')
                         ? +this.cost.value : 0 - +this.cost.value);
                     localStorage.setItem('balance', '' + addCost);
-                    this.data.unshift(value);
-                    this.storageSrv.balance = addCost;
-                    this.transService.balance = addCost;
+                    this.transService.balance += value.cost;
+                    this.transService.transactions.unshift(value);
                 },
                 error => {
                     console.log(error);
                 });
-        this.modalController.dismiss();
+        this.router.navigate(['/main']);
     }
 
     cancel(): void {
-        this.modalController.dismiss();
+        this.router.navigate(['/main']);
     }
 
     contentClick() {
-        console.log(this.transactionType);
-        let x = document.querySelectorAll('.select-text');
-        console.log(x);
-        for (let i = 0; i < x.length; i++) {
-            console.log(x[i]);
-        }
     }
-    selectClick(el) {
 
-        // console.log(el);
+    selectClick(el) {
     }
 }

@@ -1,16 +1,11 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Login</ion-title>
+        <ion-title color="white" text-left>Login</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-        <ion-list-header>
-            <ion-label>
-                Register
-            </ion-label>
-        </ion-list-header>
         <form [formGroup]="loginForm">
             <div class="input-container">
                 <ion-item>
@@ -25,7 +20,7 @@
                     <ion-input name="password" type="password" formControlName="password"
                                placeholder="Enter password"></ion-input>
                 </ion-item>
-                <ion-col *ngIf="password.invalid && (password.dirty || password.touched)" color="danger"
+                <ion-col *ngIf="password.invalid && (password.dirty || password.touched)"
                          class="alert alert-danger">
                     <span class="error-msg">{{ getErrorMessage('password') }}</span>
                 </ion-col>
@@ -34,8 +29,8 @@
                 <ion-grid>
                     <ion-row justify-content-center>
                         <ion-col size="12">
-                            <ion-button slot="" size="normal" class="submit-btn ion-col-3" color="primary"
-                                        (click)="submitLogin()">Submit
+                            <ion-button slot="" size="normal" class="submit-btn ion-col-3"
+                                        (click)="submitLogin()" color="orange" [disabled]="!loginForm.valid">Submit
                             </ion-button>
                         </ion-col>
                     </ion-row>
@@ -43,4 +38,12 @@
             </ion-item>
         </form>
     </ion-list>
+    <section class="bottom-buttons">
+        <ion-item [href]="'/register'" routerDirection="forward" text-center>
+            <ion-label color="white">Register</ion-label>
+        </ion-item>
+        <ion-item [href]="'/forgot'" routerDirection="forward" text-center>
+            <ion-label color="white">Forgot password</ion-label>
+        </ion-item>
+    </section>
 </ion-content>

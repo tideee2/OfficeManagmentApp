@@ -3,17 +3,12 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>Register</ion-title>
+        <ion-title text-left color="white">Register</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-        <ion-list-header>
-            <ion-label>
-                Register
-            </ion-label>
-        </ion-list-header>
         <form [formGroup]="regform">
             <div class="input-container">
                 <ion-item>
@@ -64,8 +59,14 @@
                 <ion-grid>
                     <ion-row justify-content-center>
                         <ion-col size="12">
-                            <ion-button slot="" size="normal" class="submit-btn ion-col-3" color="primary"
-                                         (click)="submitRegister()">Submit
+                            <ion-button
+                                    slot="" size="normal"
+                                    class="submit-btn ion-col-3"
+                                    color="primary"
+                                    (click)="submitRegister()"
+                                    [disabled]="!regform.valid"
+                                    color="orange">
+                                Submit
                             </ion-button>
                         </ion-col>
                     </ion-row>

@@ -76,6 +76,8 @@ export class LoginPage implements OnInit {
                 this.transService.email = value.user.email;
                 this.transService.id = value.user._id;
                 this.transService.token = value.token;
+                this.transService.name = value.user.name;
+                console.log(value);
                 this.router.navigate(['main']);
             },
             error => {

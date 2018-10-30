@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {TransactionsService} from '../services/transactions.service';
+import {StorageService} from '../services/storage.service';
 
 @Component({
     selector: 'app-change',
@@ -19,7 +21,9 @@ export class ChangePage implements OnInit {
                 public authSrv: AuthService,
                 public http: HttpClient,
                 public alertController: AlertController,
-                private router: Router) {
+                private router: Router,
+                public transService: TransactionsService,
+                public storageSrv: StorageService) {
         this.changeForm = formBuilder.group({
             username: [null,
                 Validators.compose([
@@ -79,10 +83,10 @@ export class ChangePage implements OnInit {
     }
 
     ngOnInit() {
-        // this.authSrv.changePassword('1111', '2222', this.token)
-        //     .subscribe(data => {
-        //         console.log(data);
-        //     });
+        // console.log(this.transService.name);
+        // this.changeForm.setValue({username: this.transService.name});
+        this.changeForm.controls.username.value = this.transService.name;
+        // console.log(this.changeForm.controls.username);
     }
 
     comparePasswords(group: FormGroup): { [key: string]: any } {
@@ -96,6 +100,10 @@ export class ChangePage implements OnInit {
 
     get username() {
         return this.changeForm.get('username');
+    }
+
+    set username(val) {
+        this.changeForm.value.username = val;
     }
 
     get old_password() {

@@ -34,19 +34,6 @@
             </div>
         </ion-card-content>
     </ion-card>
-    <!--<ion-card>-->
-    <!--<ion-card-header>-->
-    <!--Total-->
-    <!--</ion-card-header>-->
-    <!--<ion-card-content>-->
-    <!--$ {{transService.balance}}-->
-    <!--</ion-card-content>-->
-    <!--</ion-card>-->
-    <!--<ion-card class="price-card" (swiperight)="swipeAll($event)">-->
-    <!--<ion-card-content>-->
-    <!--<ion-label color="success">{{this.transService.balance}} UAH</ion-label>-->
-    <!--</ion-card-content>-->
-    <!--</ion-card>-->
     <section padding>
         <ion-card class="inf-list">
             <ion-list>
@@ -89,10 +76,14 @@
 <ion-footer>
     <ion-toolbar class="footer-toolbar">
         <ion-buttons color="transparent" slot="start" class="footer-btn">
-            <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+            <ion-button icon-only (click)="goToSettings()">
+                <ion-icon ios="ios-settings" md="md-settings"></ion-icon>
+            </ion-button>
         </ion-buttons>
         <ion-buttons color="transparent" slot="end" class="footer-btn">
-            <ion-icon name="search"></ion-icon>
+            <ion-button icon-only>
+                <ion-icon name="search"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-footer>
