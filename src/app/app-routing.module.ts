@@ -12,7 +12,9 @@ const routes: Routes = [
     {path: 'forgot', loadChildren: './forgot/forgot.module#ForgotPageModule'},
     {path: 'register', loadChildren: './register/register.module#RegisterPageModule'},
     {path: 'user', loadChildren: './user/user.module#UserPageModule', canActivate: [AboutGuard]},
-    {path: '**', redirectTo: 'home'},
+    {path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule', canActivate: [AboutGuard]},
+    {path: '**', redirectTo: 'home'}
+
 ];
 
 @NgModule({

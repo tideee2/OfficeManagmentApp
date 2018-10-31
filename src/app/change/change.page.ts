@@ -25,13 +25,6 @@ export class ChangePage implements OnInit {
                 public transService: TransactionsService,
                 public storageSrv: StorageService) {
         this.changeForm = formBuilder.group({
-            username: [null,
-                Validators.compose([
-                    // Validators.required,
-                    Validators.maxLength(10),
-                    Validators.minLength(3),
-                    Validators.pattern('[a-zA-Z ]*')]
-                )],
             matchingPasswords: formBuilder.group({
                     old_password: ['',
                         Validators.compose([
@@ -53,12 +46,6 @@ export class ChangePage implements OnInit {
                 }),
         });
         this.validation_messages = {
-            'username': {
-                required: 'Username is required.',
-                minlength: 'Username must be at least 3 characters long.',
-                maxlength: 'Username cannot be more than 10 characters long.',
-                pattern: 'Your username must contain only letters.'
-            },
             'email': {
                 required: 'Email is required',
                 pattern: 'Enter a valid email'
@@ -82,12 +69,7 @@ export class ChangePage implements OnInit {
         };
     }
 
-    ngOnInit() {
-        // console.log(this.transService.name);
-        // this.changeForm.setValue({username: this.transService.name});
-        this.changeForm.controls.username.value = this.transService.name;
-        // console.log(this.changeForm.controls.username);
-    }
+    ngOnInit() {}
 
     comparePasswords(group: FormGroup): { [key: string]: any } {
         const password = group.controls['old_password'];
@@ -121,9 +103,8 @@ export class ChangePage implements OnInit {
         });
         return res[0];
     }
+
     submitChange(): void {
-        console.log(this.username.value);
-        if (this.username.value === null) {
         this.authSrv.changePassword(this.old_password.value, this.new_password.value, this.token).subscribe(value => {
                 console.log(value);
                 // this.presentAlert('Message', 'Register is successful. Check your email');
@@ -137,20 +118,10 @@ export class ChangePage implements OnInit {
                     // this.presentAlert('Error', error.error);
                 }
             });
-        } else {
-            this.authSrv.changeUsername(this.old_password.value, this.old_password.value, this.token).subscribe(value => {
-                    console.log(value);
-                    // this.presentAlert('Message', 'Register is successful. Check your email');
-                },
-                error => {
-                    console.log(error);
-                    if (error.status === 200) {
-                        // this.presentAlert('Message', error.error.text + ' and login');
-                        // this.router.navigate(['login']);
-                    } else {
-                        // this.presentAlert('Error', error.error);
-                    }
-                });
-        }
+    }
+
+    logout() {
+        localStorage.clear();
+        this.router.navigate(['/home']);
     }
 }

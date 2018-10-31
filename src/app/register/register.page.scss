@@ -14,6 +14,17 @@ ion-header {
   }
 }
 ion-content {
+  ion-title {
+    margin: 10vh 0 5vh 0;
+    color: #fff;
+    font-size: 5vh;
+    div {
+      margin:10px 0;
+    }
+  }
+  .alert {
+    margin-top: 3px;
+  }
   section {
     padding-bottom: 0;
   }
@@ -25,7 +36,7 @@ ion-content {
       ion-item {
         background: #33333D;
         color: #fff;
-        border-bottom: 1px solid #fff;
+        border: 1px solid #fff;
       }
     }
     .alert {
@@ -38,14 +49,29 @@ ion-content {
   }
 }
 .input-container {
-  height: 15vh;
+  height: 12vh;
 }
 .bottom-buttons {
-  margin-top: 10vh;
-  ion-label {
-    text-decoration: underline;
-  }
+
 }
 ion-back-button {
   color: #fff;
+}
+.submit-btn-container {
+  margin-left: -15px;
+  margin-top: -10vh;
+  width: 55vh;
+  ion-button {
+    --border-radius: 8px;
+    --height: 8vh;
+  }
+}
+ion-button {
+  width: 100%;
+}
+.bottom-buttons {
+  margin-top: -4vh;
+  ion-label {
+    font-size: 12px;
+  }
 }

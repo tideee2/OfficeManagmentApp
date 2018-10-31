@@ -3,24 +3,13 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title color="white">User settings</ion-title>
+        <ion-title color="white">Settings</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
         <form [formGroup]="changeForm">
-            <div class="input-container">
-                <ion-item>
-                    <!--<ion-label position="fixed">Enter username</ion-label>-->
-                    <ion-input class="form-control" id="username" formControlName="username"
-                               placeholder="Enter username"></ion-input>
-                </ion-item>
-                <div *ngIf="username.invalid && (username.dirty || username.touched)" color="danger"
-                     class="alert alert-danger">
-                    <span class="error-msg">{{ getErrorMessage('username') }}</span>
-                </div>
-            </div>
             <div formGroupName="matchingPasswords">
                 <div class="input-container">
                     <ion-item>
@@ -46,30 +35,26 @@
                 </div>
             </div>
             <div class="input-container">
-                <ion-row *ngIf="old_password.valid && new_password.valid && changeForm.get('matchingPasswords').valid">
+                <ion-row *ngIf="old_password.valid && new_password.valid && !changeForm.get('matchingPasswords').valid">
                     <ion-col class="error-msg">
                         <span class="error-msg"ion-text>Passwords cannot be the same</span>
                     </ion-col>
                 </ion-row>
             </div>
             <ion-item class="submit-btn-container">
-                <ion-grid>
-                    <ion-row justify-content-center>
-                        <ion-col size="12">
-                            <ion-button
-                                size="normal"
-                                class="submit-btn ion-col-3"
-                                color="orange"
-                                (click)="submitChange()">
-                                Submit
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+                <ion-row>
+                    <ion-col size="6">
+                        <ion-button
+                            [disabled]="!changeForm.valid"
+                            size="normal"
+                            class="submit-btn ion-col-3"
+                            color="orange"
+                            (click)="submitChange()">
+                            Submit
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
             </ion-item>
         </form>
     </ion-list>
-    <ion-button (click)="logout()">
-        Log out
-    </ion-button>
 </ion-content>

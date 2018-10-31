@@ -139,7 +139,8 @@ export class RegisterPage implements OnInit {
                     this.presentAlert('Message', error.error.text + ' and login');
                     this.router.navigate(['login']);
                 } else {
-                    this.presentAlert('Error', error.error);
+                    console.log(error);
+                    this.presentAlert('Error', error.statusText);
                 }
             });
     }

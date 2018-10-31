@@ -145,7 +145,7 @@ export class MainPage implements OnInit {
     }
 
     goToSettings () {
-        this.router.navigate(['/change', {}]);
+        this.router.navigate(['/settings', {}]);
         console.log('qqq');
     }
 }

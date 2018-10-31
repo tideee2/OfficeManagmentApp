@@ -48,17 +48,17 @@ export class AuthService {
     }
 
     public changePassword(oldPassword: string, newPassword: string, token: string): Observable<any> {
+        console.log(oldPassword);
+        console.log(newPassword);
         return this.http.put(this.MAIN_URL + 'user/password', {
             'confirm': oldPassword,
             'password': newPassword
         }, {headers: new HttpHeaders({'x-access-token': token})});
     }
 
-    public changeUsername(newUsername: string, oldPassword: string, token: string): Observable<any> {
-        return this.http.put(this.MAIN_URL + 'user/password', {
-            'confirm': oldPassword,
-            'username': newUsername
-        }, {headers: new HttpHeaders({'x-access-token': token})});
+    public changeUsername(newUsername: string, token: string): Observable<any> {
+        return this.http.put(this.MAIN_URL + 'user/name/' + newUsername, {},
+            {headers: new HttpHeaders({'x-access-token': token})});
     }
 
     public forgotPassword(email: string): Observable<any> {

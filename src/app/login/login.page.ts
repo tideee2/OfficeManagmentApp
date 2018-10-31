@@ -58,8 +58,10 @@ export class LoginPage implements OnInit {
         return res[0];
     }
 
-    submitLogin(): void {
-        this.auth.loginUser(this.email.value, this.password.value).subscribe( (value: any) => {
+    submitLogin(_email?, _pass?): void {
+        _email = _email || this.email.value;
+        _pass = _pass || this.password.value;
+        this.auth.loginUser(_email, _pass).subscribe( (value: any) => {
                 console.log(value);
                 this.presentAlert('Message', 'Login is successful. Welcome.');
                 this.storageSrv.balance = value.user.balance;
