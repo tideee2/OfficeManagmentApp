@@ -240,6 +240,9 @@ ion-footer {
       color: #fff;
       font-size: 24px;
       margin: 0 10px;
+      ion-button {
+        --ion-color-base: #fff;
+      }
       .footer-btn {
         border: none!important;
         background: var(--buttonface, #f00);

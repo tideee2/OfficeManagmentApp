@@ -1,12 +1,13 @@
 :host {
   --ion-toolbar-background-color: #383840;
 }
+
 ion-header {
   ion-toolbar {
     .toolbar-container {
-      ion-title{
+      ion-title {
         font-weight: 500;
-        text-align: left!important;
+        text-align: left !important;
       }
     }
     ion-item {
@@ -16,6 +17,7 @@ ion-header {
     color: #fff;
   }
 }
+
 ion-content {
   section {
     padding-bottom: 0;
@@ -28,7 +30,7 @@ ion-content {
       ion-item {
         background: #33333D;
         color: #fff;
-        text-align:center;
+        text-align: center;
       }
     }
     .alert {
@@ -42,19 +44,27 @@ ion-content {
   .input-container {
     height: 10vh;
   }
+  .check-icon {
+    border: 1px solid #fff;
+    border-radius: 50%;
+  }
 }
+
 ion-input {
   border-bottom: 1px solid #fff;
 }
+
 .img-container {
   background: #33333D;
 }
+
 ion-item.btn {
   ion-button {
+    margin: 0 auto;
     --box-shadow: none;
     border: 1px solid #DB952B;
     border-radius: 5px;
-    width: 100%;
+    //width: 60%;
     button {
       text-align: center !important;
     }

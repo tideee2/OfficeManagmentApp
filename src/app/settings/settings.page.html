@@ -19,10 +19,9 @@
                     <ion-icon name="md-create" *ngIf="!isEditName" (click)="editClick(qqq)"></ion-icon>
                 </ion-item>
                 <ion-item *ngIf="isEditName">
-                    <!--<ion-label position="fixed">Enter username</ion-label>-->
                     <ion-input class="form-control" id="username" formControlName="username"
                                placeholder="Enter username" #qqq></ion-input>
-                    <ion-icon name="md-checkmark" *ngIf="isEditName" (click)="changeUsername()"></ion-icon>
+                    <ion-icon name="md-checkmark" *ngIf="isEditName" (click)="changeUsername()" class="check-icon"></ion-icon>
                 </ion-item>
                 <div *ngIf="username.invalid && (username.dirty || username.touched)" color="danger"
                      class="alert alert-danger">

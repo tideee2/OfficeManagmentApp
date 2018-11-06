@@ -73,7 +73,7 @@ export class SettingsPage implements OnInit {
     editClick(el: HTMLElement) {
         this.isEditName = !this.isEditName;
         console.log(this.inputName);
-        this.inputName.first.focus = true;
+        // this.inputName.first.focus = true;
     }
 
     changeUsername() {

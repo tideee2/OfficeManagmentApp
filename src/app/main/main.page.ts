@@ -1,5 +1,5 @@
 import {Component, OnInit, Renderer, ViewChild} from '@angular/core';
-import {App, Content, InfiniteScroll, ModalController} from '@ionic/angular';
+import {App, Content, InfiniteScroll, ModalController, Platform} from '@ionic/angular';
 import {AddPurchasePage} from '../add-purchase/add-purchase.page';
 import {TransactionsService} from '../services/transactions.service';
 import {StorageService} from '../services/storage.service';
@@ -25,7 +25,7 @@ export class MainPage implements OnInit {
     public items = [];
 
     constructor(public modalController: ModalController, public transService: TransactionsService, public renderer: Renderer,
-                public storageSrv: StorageService, public router: Router) {
+                public storageSrv: StorageService, public router: Router, public platform: Platform) {
         console.log(this.transService.balance);
         this.transService.balance = this.transService.balance || parseInt(localStorage.getItem('balance'), 10);
         console.log(this.transService.transactions);
@@ -111,18 +111,6 @@ export class MainPage implements OnInit {
     }
 
     qq(event) {
-        console.log(event);
-
-        console.log('event');
-        // console.log(this.renderer.);
-        // console.log(this.content.scrollToTop(1000).then(() => console.log('ff')));
-
-        // console.log('ccc');
-        // const x: HTMLElement = document.querySelectorAll('ion-header')[0];
-        // console.log(x.className);
-        // x.className.concat(' haeder-el');
-        // x.className = (x.className.indexOf('hide-header') >= 0) ? x.className.replace(' hide-header', '') :
-        //     x.className.concat(' hide-header');
     }
 
     swipeAll(event: any): any {
@@ -130,7 +118,14 @@ export class MainPage implements OnInit {
     }
 
     f1() {
-        console.log('zzz');
+        // console.log(this.platform);
+        this.platform.backButton.closed = true;
+        this.platform.backButton.emit();
+        this.platform.backButton.subscribe((x: any) => {
+            console.log(x);
+        });
+        console.log(this.platform);
+
     }
 
     showButton(x: HTMLElement) {
